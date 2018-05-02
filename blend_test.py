@@ -67,7 +67,7 @@ actr.record_history("blending-trace")
 
 #make up some chunks and add them to memory
 #y = af + bf + cf
-a, b, c = 1, 5, 0
+a, b, c = 3, 1, 0
 
 #get 3 fs from normal
 mu = 5
@@ -116,13 +116,17 @@ feature_sets = [[0,0],
 chunks = []
 #random value vesion
 # #create chuns from thsoe random feature sets
-# for fset in feature_sets:
-#     actr.add_dm(['isa', 'decision', 'f1', fset[0], 'f2', fset[1],# 'f3', fset[2],
-#                  #   'value',y_value(fset[0],fset[1],fset[2])])
-#                  'value', y_value(fset[0], fset[1])])
-#
-# chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', y_value(0.5,0.5)]
+for fset in feature_sets:
+    actr.add_dm(['isa', 'decision', 'f1', fset[0], 'f2', fset[1],# 'f3', fset[2],
+                 #   'value',y_value(fset[0],fset[1],fset[2])])
+                 'value', y_value(fset[0], fset[1])])
 
+chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', y_value(0.5,0.5)]
+
+#two terms
+#actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+
+#three terms
 # actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'f3', 0, 'value', 0])
 # actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'f3', 1, 'value', 1])
 # actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'f3', 0, 'value', 1])
@@ -142,35 +146,35 @@ chunks = []
 
 
 # #probability version
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
-
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
-
-
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
-
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
-
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
-
-
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 1])
-actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
-
-chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', 1]#, 'f3', 0, 'actual', 1]
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
+#
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
+#
+#
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 0, 'value', 1])
+#
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 1, 'f2', 1, 'value', 1])
+#
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
+#
+#
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 1])
+# actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 1, 'value', 0])
+#
+# chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', 1]#, 'f3', 0, 'actual', 1]
 
 
 
