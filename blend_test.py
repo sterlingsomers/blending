@@ -2,7 +2,7 @@ import json
 import actr
 import numpy as np
 import random
-
+import itertools
 
 not_dicts = ['FILLED-SLOTS','EMPTY-SLOTS','BLENDED-SLOTS','IGNORED-SLOTS','RESULT-CHUNK','MATCHED-CHUNK-VALUES',
              'MATCHED-VALUES-MAGNITUDES']
@@ -67,7 +67,7 @@ actr.record_history("blending-trace")
 
 #make up some chunks and add them to memory
 #y = af + bf + cf
-a, b, c = 3, 1, 0
+a, b, c = 2, 1, 1
 
 #get 3 fs from normal
 mu = 5
@@ -78,6 +78,29 @@ feature_sets = [[0,0],
                 [0,1],
                 [1,0],
                 [1,1]]
+
+#mark examples
+chks = []
+
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+
+for x in chks:
+    actr.add_dm(x)
 
 # feature_sets = [[0,0,0],
 #                 [0,0,1],
@@ -116,12 +139,16 @@ feature_sets = [[0,0],
 chunks = []
 #random value vesion
 # #create chuns from thsoe random feature sets
-for fset in feature_sets:
-    actr.add_dm(['isa', 'decision', 'f1', fset[0], 'f2', fset[1],# 'f3', fset[2],
-                 #   'value',y_value(fset[0],fset[1],fset[2])])
-                 'value', y_value(fset[0], fset[1])])
+# for fset in feature_sets:
+#     actr.add_dm(['isa', 'decision', 'f1', fset[0], 'f2', fset[1],# 'f3', fset[2],
+#                  #   'value',y_value(fset[0],fset[1],fset[2])])
+#                  'value', y_value(fset[0], fset[1])])
+#
+# chk = ['isa', 'observation', 'f1', 0.8, 'f2', 0.8, 'actual', y_value(0.8,0.8)]
 
-chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', y_value(0.5,0.5)]
+
+
+
 
 #two terms
 #actr.add_dm(['isa', 'decision', 'f1', 0, 'f2', 0, 'value', 0])
@@ -180,16 +207,18 @@ chk = ['isa', 'observation', 'f1', 0.5, 'f2', 0.5, 'actual', y_value(0.5,0.5)]
 
 
 
-
+#for mark
+chk = ['isa', 'observation', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 1, 'needsWater', 0, 'actual', 1]
 
 chunk = actr.define_chunks(chk)
 actr.schedule_simple_event_now("set-buffer-chunk",
                                ['imaginal', chunk[0]])
-actr.run(5)
+actr.run(50)
 
 d = actr.get_history_data("blending-trace")
 d = json.loads(d)
 
+asdf = actr.get_history_data("blending-times")
 
 
 def compute_S(blend_trace, keys_list):
@@ -197,8 +226,9 @@ def compute_S(blend_trace, keys_list):
     #probablities
     probs = [x[3] for x in access_by_key('MAGNITUDES',access_by_key('SLOT-DETAILS',blend_trace[0][1])[0][1])]
     #feature values in probe
-    FKs = [access_by_key(key.capitalize(),access_by_key('RESULT-CHUNK',blend_trace[0][1])) for key in keys_list]
+    FKs = [access_by_key(key.upper(),access_by_key('RESULT-CHUNK',blend_trace[0][1])) for key in keys_list]
     chunk_names = [x[0] for x in access_by_key('CHUNKS', blend_trace[0][1])]
+
     #Fs is all the F values (may or may not be needed for tss)
     #They are organized by chunk, same order as probs
     vjks = []
@@ -240,26 +270,32 @@ def compute_S(blend_trace, keys_list):
         ts2.append(sum(tss[i]))
 
     #vios
-    vios = [actr.chunk_slot_value(x,'value') for x in chunk_names]
-
+    viosList = []
+    viosList.append([actr.chunk_slot_value(x,'radio') for x in chunk_names])
+    viosList.append([actr.chunk_slot_value(x,'food') for x in chunk_names])
+    viosList.append([actr.chunk_slot_value(x, 'water') for x in chunk_names])
+    viosList.append([actr.chunk_slot_value(x, 'firstaid') for x in chunk_names])
     #compute (7)
-    results = []
-    for i in range(len(FKs)):
-        tmp = 0
-        sub = []
-        for j in range(len(probs)):
-            if FKs[i] > vjks[j][i]:
-                dSim = -1/n
-            elif FKs[i] == vjks[j][i]:
-                dSim = 0
-            else:
-                dSim = 1/n
-            tmp = probs[j] * (dSim - ts2[i]) * vios[j]#sum(tss[i])) * vios[j]
-            sub.append(tmp)
-        results.append(sub)
+    rturn = []
+    for vios in viosList:
+        results = []
+        for i in range(len(FKs)):
+            tmp = 0
+            sub = []
+            for j in range(len(probs)):
+                if FKs[i] > vjks[j][i]:
+                    dSim = -1/n
+                elif FKs[i] == vjks[j][i]:
+                    dSim = 0
+                else:
+                    dSim = 1/n
+                tmp = probs[j] * (dSim - ts2[i]) * vios[j]#sum(tss[i])) * vios[j]
+                sub.append(tmp)
+            results.append(sub)
 
-    print("compute S complete")
-    return results
+        print("compute S complete")
+        rturn.append(results)
+    return rturn
 
 
    #print("compute_S complete")
@@ -301,10 +337,13 @@ t = access_by_key('TEMPERATURE',d[0][1])
 # #the values
 # vs = [actr.chunk_slot_value(x,'value') for x in chunk_names]
 #
-sums = compute_S(d, ['f1','f2'])#,'f3'])
-
-for s in sums:
-    print(MP/t * sum(s))
+factors = ['needsRadio','needsFood', 'needsWater', 'needsFA']
+result_factors = ['radio','food','water','first aid']
+results = compute_S(d, factors)#,'f3'])
+for sums,result_factor in zip(results,result_factors):
+    print("For", result_factor)
+    for s,factor in zip(sums,factors):
+        print(factor, MP/t * sum(s))
 
 print("actual value is", actr.chunk_slot_value('OBSERVATION0','ACTUAL'))
 
