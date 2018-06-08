@@ -79,25 +79,79 @@ feature_sets = [[0,0],
                 [1,0],
                 [1,1]]
 
+def generate_module2(radio, food, fa, water, bays=4):
+    provisions_needed = [radio, food, fa, water]
+    provisions = {'radio': 0, 'food':0, 'firstaid':0, 'water':0}
+    while bays:
+        print(radio, food, fa, water, bays, provisions_needed)
+        if provisions_needed[0]:
+            provisions['radio'] = provisions['radio'] + 1
+            provisions_needed[0] = provisions_needed[0] - 1
+            bays = bays - 1
+            if not bays: break
+        if provisions_needed[1]:
+            provisions['food'] = provisions['food'] + 1
+            provisions_needed[1] = provisions_needed[1] - 1
+            bays = bays - 1
+            if not bays: break
+        if provisions_needed[2]:
+            provisions['firstaid'] = provisions['firstaid'] + 1
+            provisions_needed[2] = provisions_needed[2] - 1
+            bays = bays - 1
+            if not bays: break
+        if provisions_needed[3]:
+            provisions['water'] = provisions['water'] + 1
+            provisions_needed[3] = provisions_needed[3] - 1
+            bays = bays - 1
+            if not bays: break
+
+        if not radio or not food or not fa or not water:
+            return ['isa', 'decision', 'needsRadio', radio,
+                    'needsFood', food,
+                    'needsFA', fa,
+                    'needsWater', water,
+                    'radio', provisions['radio'],
+                    'food', provisions['food'],
+                    'firstaid', provisions['firstaid'],
+                    'water', provisions['water']]
+
+    return ['isa', 'decision', 'needsRadio', radio,
+            'needsFood', food,
+            'needsFA', fa,
+            'needsWater', water,
+            'radio',provisions['radio'],
+            'food', provisions['food'],
+            'firstaid', provisions['firstaid'],
+            'water', provisions['water']]
+
+#print(generate_module2(0,0,0,1))
+#for i in range(100):
+#    print(generate_module2(*np.random.randint(4,size=4)))
+
 #mark examples
 chks = []
 
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
-chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsFood', 0, 'needsWater', 0, 'food', 0, 'water', 0])
+chks.append(['isa', 'decision', 'needsFood', 0, 'needsWater', 1, 'food', 0, 'water', 2])
+chks.append(['isa', 'decision', 'needsFood', 1, 'needsWater', 0, 'food', 2, 'water', 0])
+chks.append(['isa', 'decision', 'needsFood', 1, 'needsWater', 1, 'food', 1, 'water', 1])
+
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 0, 'needsFA', 1, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 0, 'needsFood', 0, 'needsFA', 0, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 0, 'needsWater', 1, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
+# chks.append(['isa', 'decision', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 0, 'radio', 1, 'food', 1, 'firstaid', 0, 'water', 0])
 
 for x in chks:
     actr.add_dm(x)
@@ -208,8 +262,8 @@ chunks = []
 
 
 #for mark
-chk = ['isa', 'observation', 'needsRadio', 0, 'needsFood', 1, 'needsFA', 1, 'needsWater', 0, 'actual', 1]
-
+#chk = ['isa', 'observation', 'needsRadio', 1, 'needsFood', 1, 'needsFA', 1, 'needsWater', 1, 'actual', 1]
+chk = ['isa', 'observation', 'needsFood',0.75, 'needsWater', 0.25, 'actual', 1]
 chunk = actr.define_chunks(chk)
 actr.schedule_simple_event_now("set-buffer-chunk",
                                ['imaginal', chunk[0]])
@@ -266,15 +320,15 @@ def compute_S(blend_trace, keys_list):
                 dSim = 0
             else:
                 dSim = 1/n
-            tss[i].append(probs[i] * dSim)
+            tss[i].append(probs[j] * dSim)
         ts2.append(sum(tss[i]))
 
     #vios
     viosList = []
-    viosList.append([actr.chunk_slot_value(x,'radio') for x in chunk_names])
+    #viosList.append([actr.chunk_slot_value(x,'radio') for x in chunk_names])
     viosList.append([actr.chunk_slot_value(x,'food') for x in chunk_names])
     viosList.append([actr.chunk_slot_value(x, 'water') for x in chunk_names])
-    viosList.append([actr.chunk_slot_value(x, 'firstaid') for x in chunk_names])
+    #viosList.append([actr.chunk_slot_value(x, 'firstaid') for x in chunk_names])
     #compute (7)
     rturn = []
     for vios in viosList:
@@ -338,12 +392,14 @@ t = access_by_key('TEMPERATURE',d[0][1])
 # vs = [actr.chunk_slot_value(x,'value') for x in chunk_names]
 #
 factors = ['needsRadio','needsFood', 'needsWater', 'needsFA']
+factors = ['needsFood', 'needsWater']
 result_factors = ['radio','food','water','first aid']
+result_factors = ['food','water']
 results = compute_S(d, factors)#,'f3'])
 for sums,result_factor in zip(results,result_factors):
     print("For", result_factor)
     for s,factor in zip(sums,factors):
-        print(factor, MP/t * sum(s))
+        print(factor, MP/t * sum(s), sum(s),s)
 
 print("actual value is", actr.chunk_slot_value('OBSERVATION0','ACTUAL'))
 

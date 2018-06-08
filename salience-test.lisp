@@ -20,8 +20,10 @@
          ;:seed (1 1) :bll nil :blc 5 :mp 1 :v t :blt t :esc t :ans .25 :rt -5)
          :seed (1 1) :bll nil :blc 5 :mp 1 :v t :blt t :esc t :ans nil :rt -5)
 
-  (chunk-type observation needsRadio needsFood needsFA needsWater actual)
-  (chunk-type decision needsRadio needsFood needsFA needsWater radio food firstaid water)
+  ;(chunk-type observation needsRadio needsFood needsFA needsWater actual)
+  (chunk-type observation needsFood needsWater actual)
+  ;(chunk-type decision needsRadio needsFood needsFA needsWater radio food firstaid water)
+  (chunk-type decision needsFood needsWater food water)
   (chunk-type target key value size)
   (chunk-type size (size-type t))
   
@@ -81,9 +83,9 @@
   
   (p p1
      =imaginal>
-       needsRadio =nR
+       ;needsRadio =nR
        needsFood =nFo
-       needsFA =nFa
+       ;needsFA =nFa
        needsWater =nW
      ?blending>
        state free
@@ -93,9 +95,9 @@
      ;@imaginal>
      +blending>
        isa decision
-       needsRadio =nR
+       ;needsRadio =nR
        needsFood =nFo
-       needsFA =nFa
+       ;needsFA =nFa
        needsWater =nW
        actual nil)
 
@@ -103,10 +105,10 @@
   (p p2
      =blending>
        isa decision
-       radio =rad
+       ;radio =rad
        food =foo
        water =wat
-       firstaid =fir
+       ;firstaid =fir
      ?blending>
        state free
      ==>
